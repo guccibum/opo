@@ -1,0 +1,300 @@
+/* opo4.1 — dark, one typeface, structure only.
+   Nothing here decides where anything goes; that is all in js, so it can ease. */
+
+:root {
+  --paper: #0b0b0c;
+  --ink:   #e9e9ea;
+  --gray:  #8a8a90;
+  --hair:  #3a3a40;
+
+  --type:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --size:  16px;
+  --lead:  1.45;
+
+  --top-h: 62px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; height: 100%;
+  font: var(--size)/var(--lead) var(--type);
+  color: var(--ink); background: var(--paper);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.blocked > *:not(#file-only) { display: none; }
+
+/* ---------- the top row ---------- */
+/* Space Agnostic's: fixed, floating with no bar behind it, every word placed
+   absolutely by nav.js. The container ignores the pointer so the gaps between
+   words never sit on top of the page. */
+
+#top {
+  position: fixed; top: 22px; left: 0; width: 100%; min-height: 24px;
+  display: flex; align-items: flex-start;
+  padding: 0 26px;
+  z-index: 1001; pointer-events: none;
+}
+#words { display: contents; }
+
+/* the catch area: invisible, larger than the text, and it never moves */
+.word {
+  position: absolute; top: 0;
+  padding: 12px 16px; margin: -12px -16px;
+  color: #fff;
+  font: 400 18px/1.2 var(--type);
+  text-transform: lowercase;
+  white-space: pre;
+  background: none; border: 0;
+  cursor: pointer; pointer-events: auto;
+  user-select: none; -webkit-user-select: none;
+  opacity: .6;
+  transition: opacity .25s ease-out;
+}
+.word:hover { opacity: 1; }
+.word[aria-current="true"] { opacity: 1; }
+
+/* the text: the only thing that moves. their slide, put on hover */
+.word .label {
+  display: inline-block;
+  position: relative; top: 0;
+  transition: top .5s ease-out;
+}
+.word:hover .label { top: 6px; }
+
+#readout {
+  margin-left: auto;
+  font: 400 18px/1.2 var(--type);
+  color: #fff; opacity: .6;
+  max-width: 46vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+/* ---------- pages ---------- */
+
+main { position: absolute; inset: 0; }
+.page { position: absolute; inset: 0; }
+.page[hidden] { display: none; }
+
+/* ---------- taj ---------- */
+
+#page-taj {
+  display: grid; place-items: center;
+  background: var(--paper);
+  opacity: 0;
+  transition: opacity var(--fade-in, 1400ms) ease-out;
+}
+#page-taj.lit { opacity: 1; }
+/* an id selector outranks .page[hidden], so this has to be said again here or
+   the homepage never hides and sits behind the other pages */
+#page-taj[hidden] { display: none; }
+
+/* the invert: ink and ground trade places, and nothing else changes */
+#intro-word {
+  font: 400 168px/1 var(--type);
+  text-transform: lowercase;
+  color: var(--ink); background: transparent;
+  padding: 0 .12em .06em;
+  cursor: pointer;
+  user-select: none; -webkit-user-select: none;
+  transition: color 160ms ease-out, background-color 160ms ease-out;
+}
+#intro-word:hover { color: var(--paper); background: var(--ink); }
+
+/* ---------- selected works ---------- */
+
+#flow {
+  position: absolute; inset: var(--top-h) 0 170px 0;
+  perspective: 1100px;
+  perspective-origin: 50% 46%;
+  overflow: hidden;
+  cursor: grab;
+}
+/* the rail is a container and nothing else: it is a full-size box at z=0 and the
+   covers are pushed to negative z behind it, so it must not take the pointer */
+#rail {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.cover {
+  position: absolute; left: 50%; top: 46%;
+  width: var(--cover-w, 340px); height: var(--cover-h, 340px);
+  margin: 0; padding: 0;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  cursor: pointer; pointer-events: auto;
+}
+.cover .face {
+  position: relative;          /* a padded video is positioned inside it */
+  width: 100%; height: 100%;
+  border: 1px solid #3a3a40;
+  background: #141416;
+  overflow: hidden;
+  /* the iPod tell. one line — delete it and the reel is just cards */
+  -webkit-box-reflect: below 1px
+    linear-gradient(transparent, transparent 62%, rgba(255,255,255,.16));
+}
+/* Whole, never cropped — and it fills its frame, because works.js gives each
+   cover its own video's proportions rather than a square. `contain` is then a
+   no-op that only ever costs a subpixel, and it is the guarantee: if a cover
+   ever ends up a shape its video is not, the picture letterboxes instead of
+   losing its edges. */
+.cover video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.cover.center .face { border-color: var(--gray); }
+
+#caption {
+  position: absolute; inset: auto 0 0 0; height: 170px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; padding: 0 20px; text-align: center;
+}
+/* plain: no tracking, no case change, nothing done to it */
+#c-title { margin: 0; font-size: 20px; font-weight: 400;
+  letter-spacing: normal; text-transform: none; }
+#c-meta, #c-line { margin: 0; color: var(--gray); max-width: 52rem; }
+#c-open {
+  margin-top: 10px; font: inherit; color: var(--ink);
+  background: none; border: 1px solid var(--hair); padding: 5px 16px; cursor: pointer;
+  letter-spacing: .14em;
+  transition: border-color 200ms ease-out, letter-spacing 200ms ease-out;
+}
+#c-open:hover { border-color: var(--gray); letter-spacing: .24em; }
+#c-open[hidden] { display: none; }
+
+/* ---------- the map ---------- */
+/* A solid grid: one cell size, rows that line up, and the joint between cells
+   is the ground showing through. The hairline matters — several of these files
+   are almost entirely black, and without an edge they read as holes rather than
+   as pieces.
+
+   Nothing here transitions. Opacity is written inline every frame by map.js,
+   for the arrival and for the step back while one is open, and a transition on
+   top of that would fight it. */
+
+#map {
+  position: absolute; inset: var(--top-h) 0 0 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 700ms ease-out;
+}
+#map.on { opacity: 1; }
+
+.piece {
+  position: absolute; top: 0; left: 0;
+  margin: 0; padding: 0;
+  border: 1px solid var(--hair);
+  background: #141416;
+  overflow: hidden;
+  cursor: pointer;
+  will-change: transform, opacity;   /* the only two things that ever animate */
+  transform-origin: 50% 50%;
+  transition: border-color 160ms ease-out;
+}
+
+/* Nothing in this project is cropped. In proportional cells it makes no odds —
+   the cell is already the file's own shape, so there is nothing to crop away —
+   but it is set here so that it stays true if the cells are ever made uniform,
+   and so a cell that is a hair off its file's aspect letterboxes by a pixel
+   rather than shaving one off the edge.
+
+   FIT: 'cover' in config puts the crop back. */
+.piece img, .piece video {
+  width: 100%; height: 100%; display: block;
+  object-fit: contain;
+}
+/* a video with black baked into its frame is blown up and slid so its picture
+   fills the cell — inset.js writes the numbers, this is what they hang on */
+.piece { position: absolute; }
+.piece video[style*="position: absolute"] { top: 0; left: 0; }
+#map[data-fit="cover"] .piece img,
+#map[data-fit="cover"] .piece video { object-fit: cover; }
+
+.piece:hover { border-color: var(--gray); }
+
+/* Opened, a piece is shown whole and nothing frames it. The element stays
+   cell-shaped and is scaled to cover the size asked for, so it is larger than
+   the picture on one axis — the border and the ground would show as a slab
+   down one side of it.
+
+   That surround is invisible but it is still the element, so it is taken out
+   of the hit test and the picture is put back into it. Otherwise the empty air
+   above and below an open video counts as the video, and clicking what looks
+   like the ground does not close it. map.js gives the picture its size; this
+   centres it. */
+#map .piece.open {
+  border-color: transparent; background: none;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+#map .piece.open img, #map .piece.open video {
+  object-fit: contain;
+  pointer-events: auto;
+}
+
+/* ---------- a work's contents ---------- */
+
+#sheet {
+  position: fixed; inset: var(--top-h) 0 0 0; z-index: 1040;
+  overflow-y: auto;
+  background: var(--paper);
+  padding: 40px 20px 90px;
+}
+#sheet[hidden] { display: none; }
+#sheet-body { max-width: 54rem; margin: 0 auto; }
+#sheet-body figure { margin: 0 0 28px; }
+#sheet-body video { width: 100%; display: block; background: #141416; }
+
+/* ---------- what a piece came with ---------- */
+
+#notes {
+  position: fixed; z-index: 1050;
+  left: 26px; top: calc(var(--top-h) + 16px);
+  width: min(370px, 42vw);
+  max-height: calc(100vh - var(--top-h) - 48px);
+  overflow-y: auto;
+  padding: 18px 20px;
+  background: rgba(11, 11, 12, .93);
+  border: 1px solid var(--hair);
+  font-size: 15px;
+  scrollbar-width: thin; scrollbar-color: var(--hair) transparent;
+}
+#notes[hidden] { display: none; }
+#notes::-webkit-scrollbar { width: 7px; }
+#notes::-webkit-scrollbar-track { background: transparent; }
+#notes::-webkit-scrollbar-thumb { background: var(--hair); }
+
+#notes h2, #sheet-body h2 { margin: 0 0 12px; font-size: 17px; font-weight: 400;
+  text-transform: lowercase; letter-spacing: .04em; }
+#notes h3, #sheet-body h3 { margin: 14px 0 4px; font-size: 15px; font-weight: 400;
+  color: var(--gray); text-transform: lowercase; }
+#notes dl, #sheet-body dl { display: grid; grid-template-columns: max-content 1fr;
+  gap: 3px 14px; margin: 0 0 14px; }
+#notes dt, #sheet-body dt { color: var(--gray); text-transform: lowercase; }
+#notes dd, #sheet-body dd { margin: 0; }
+#notes p, #sheet-body p { margin: 0 0 10px; }
+#notes a, #sheet-body a { display: block; color: var(--ink);
+  word-break: break-all; margin-top: 8px; }
+
+/* ---------- the way out ---------- */
+
+#close {
+  position: fixed; z-index: 1100;
+  top: calc(var(--top-h) + 10px); right: 22px;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  font: 300 30px/1 var(--type);
+  color: var(--ink); background: var(--paper);
+  border: 1px solid var(--hair);
+  padding: 0; cursor: pointer;
+  transition: border-color 160ms ease-out, color 160ms ease-out;
+}
+#close[hidden] { display: none; }
+#close:hover { color: #fff; border-color: var(--gray); }
+
+/* ---------- file:// notice ---------- */
+
+#file-only { padding: 56px; max-width: 36rem; }
+#file-only pre { border: 1px solid var(--hair); padding: 10px; }

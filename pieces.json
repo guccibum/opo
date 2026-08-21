@@ -1,0 +1,366 @@
+{
+ "site": {
+  "title": "taj",
+  "intro": "taj"
+ },
+ "pieces": [
+  {
+   "id": "1l3 r123312528.jpg",
+   "title": "1l3 r123312528.jpg",
+   "src": "media/1l3 r123312528.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/1l3 r123312528.jpg.jpg"
+  },
+  {
+   "id": "AKN.jpg",
+   "title": "AKN.jpg",
+   "src": "media/AKN.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/AKN.jpg.jpg"
+  },
+  {
+   "id": "Aihva.jpg",
+   "title": "Aihva.jpg",
+   "src": "media/Aihva.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Aihva.jpg.jpg"
+  },
+  {
+   "id": "IMG_5103.jpg",
+   "title": "IMG_5103.jpg",
+   "src": "media/IMG_5103.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/IMG_5103.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-12 at 10.59.31 PM.jpg",
+   "title": "Screenshot 2026-03-12 at 10.59.31 PM.jpg",
+   "src": "media/Screenshot 2026-03-12 at 10.59.31 PM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-12 at 10.59.31 PM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-12 at 11.02.54 PM.jpg",
+   "title": "Screenshot 2026-03-12 at 11.02.54 PM.jpg",
+   "src": "media/Screenshot 2026-03-12 at 11.02.54 PM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-12 at 11.02.54 PM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-12 at 11.03.21 PM.jpg",
+   "title": "Screenshot 2026-03-12 at 11.03.21 PM.jpg",
+   "src": "media/Screenshot 2026-03-12 at 11.03.21 PM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-12 at 11.03.21 PM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-12 at 11.03.36 PM.jpg",
+   "title": "Screenshot 2026-03-12 at 11.03.36 PM.jpg",
+   "src": "media/Screenshot 2026-03-12 at 11.03.36 PM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-12 at 11.03.36 PM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-15 at 11.45.00 AM.jpg",
+   "title": "Screenshot 2026-03-15 at 11.45.00 AM.jpg",
+   "src": "media/Screenshot 2026-03-15 at 11.45.00 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-15 at 11.45.00 AM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-15 at 11.45.17 AM.jpg",
+   "title": "Screenshot 2026-03-15 at 11.45.17 AM.jpg",
+   "src": "media/Screenshot 2026-03-15 at 11.45.17 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-15 at 11.45.17 AM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-15 at 11.46.35 AM.jpg",
+   "title": "Screenshot 2026-03-15 at 11.46.35 AM.jpg",
+   "src": "media/Screenshot 2026-03-15 at 11.46.35 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-15 at 11.46.35 AM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-15 at 11.46.51 AM.jpg",
+   "title": "Screenshot 2026-03-15 at 11.46.51 AM.jpg",
+   "src": "media/Screenshot 2026-03-15 at 11.46.51 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-15 at 11.46.51 AM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-03-15 at 11.47.12 AM.jpg",
+   "title": "Screenshot 2026-03-15 at 11.47.12 AM.jpg",
+   "src": "media/Screenshot 2026-03-15 at 11.47.12 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-03-15 at 11.47.12 AM.jpg.jpg"
+  },
+  {
+   "id": "Screenshot 2026-07-08 at 12.17.31 AM.jpg",
+   "title": "Screenshot 2026-07-08 at 12.17.31 AM.jpg",
+   "src": "media/Screenshot 2026-07-08 at 12.17.31 AM.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/Screenshot 2026-07-08 at 12.17.31 AM.jpg.jpg"
+  },
+  {
+   "id": "alkmm1 G35.jpg",
+   "title": "alkmm1 G35.jpg",
+   "src": "media/alkmm1 G35.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/alkmm1 G35.jpg.jpg"
+  },
+  {
+   "id": "amb0.jpg",
+   "title": "amb0.jpg",
+   "src": "media/amb0.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/amb0.jpg.jpg"
+  },
+  {
+   "id": "amb01.jpg",
+   "title": "amb01.jpg",
+   "src": "media/amb01.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/amb01.jpg.jpg"
+  },
+  {
+   "id": "aujt.mp4",
+   "title": "aujt.mp4",
+   "src": "media/aujt.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/aujt.mp4.jpg",
+   "clip": "media/.previews/clips/aujt.mp4.mp4"
+  },
+  {
+   "id": "eaglroc.jpg",
+   "title": "eaglroc.jpg",
+   "src": "media/eaglroc.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/eaglroc.jpg.jpg"
+  },
+  {
+   "id": "eqee2045.jpg",
+   "title": "eqee2045.jpg",
+   "src": "media/eqee2045.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/eqee2045.jpg.jpg"
+  },
+  {
+   "id": "eqee2068.jpg",
+   "title": "eqee2068.jpg",
+   "src": "media/eqee2068.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/eqee2068.jpg.jpg"
+  },
+  {
+   "id": "eqqe001.jpg",
+   "title": "eqqe001.jpg",
+   "src": "media/eqqe001.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/eqqe001.jpg.jpg"
+  },
+  {
+   "id": "eqqe116.jpg",
+   "title": "eqqe116.jpg",
+   "src": "media/eqqe116.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/eqqe116.jpg.jpg"
+  },
+  {
+   "id": "grndsrt.jpg",
+   "title": "grndsrt.jpg",
+   "src": "media/grndsrt.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/grndsrt.jpg.jpg"
+  },
+  {
+   "id": "homer.mp4",
+   "title": "homer.mp4",
+   "src": "media/homer.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/homer.mp4.jpg",
+   "clip": "media/.previews/clips/homer.mp4.mp4"
+  },
+  {
+   "id": "hos222.jpg",
+   "title": "hos222.jpg",
+   "src": "media/hos222.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/hos222.jpg.jpg"
+  },
+  {
+   "id": "hos2222222.jpg",
+   "title": "hos2222222.jpg",
+   "src": "media/hos2222222.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/hos2222222.jpg.jpg"
+  },
+  {
+   "id": "jjuiwoks12163.jpg",
+   "title": "jjuiwoks12163.jpg",
+   "src": "media/jjuiwoks12163.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/jjuiwoks12163.jpg.jpg"
+  },
+  {
+   "id": "jjuiwoks12196.jpg",
+   "title": "jjuiwoks12196.jpg",
+   "src": "media/jjuiwoks12196.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/jjuiwoks12196.jpg.jpg"
+  },
+  {
+   "id": "jk.mp4",
+   "title": "jk.mp4",
+   "src": "media/jk.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/jk.mp4.jpg",
+   "clip": "media/.previews/clips/jk.mp4.mp4",
+   "box": [
+    328,
+    44,
+    1264,
+    948,
+    1920,
+    1080
+   ]
+  },
+  {
+   "id": "juisoqk19126.jpg",
+   "title": "juisoqk19126.jpg",
+   "src": "media/juisoqk19126.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/juisoqk19126.jpg.jpg"
+  },
+  {
+   "id": "kajhf ,,aa.mp4",
+   "title": "kajhf ,,aa.mp4",
+   "src": "media/kajhf ,,aa.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/kajhf ,,aa.mp4.jpg",
+   "clip": "media/.previews/clips/kajhf ,,aa.mp4.mp4"
+  },
+  {
+   "id": "kjb.jpg",
+   "title": "kjb.jpg",
+   "src": "media/kjb.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/kjb.jpg.jpg"
+  },
+  {
+   "id": "lmd14.jpg",
+   "title": "lmd14.jpg",
+   "src": "media/lmd14.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/lmd14.jpg.jpg"
+  },
+  {
+   "id": "lmd15.jpg",
+   "title": "lmd15.jpg",
+   "src": "media/lmd15.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/lmd15.jpg.jpg"
+  },
+  {
+   "id": "lmd16.jpg",
+   "title": "lmd16.jpg",
+   "src": "media/lmd16.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/lmd16.jpg.jpg"
+  },
+  {
+   "id": "lmd17.jpg",
+   "title": "lmd17.jpg",
+   "src": "media/lmd17.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/lmd17.jpg.jpg"
+  },
+  {
+   "id": "malakkka.mp4",
+   "title": "malakkka.mp4",
+   "src": "media/malakkka.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/malakkka.mp4.jpg",
+   "clip": "media/.previews/clips/malakkka.mp4.mp4"
+  },
+  {
+   "id": "oeerm.mp4",
+   "title": "oeerm.mp4",
+   "src": "media/oeerm.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/oeerm.mp4.jpg",
+   "clip": "media/.previews/clips/oeerm.mp4.mp4",
+   "box": [
+    0,
+    6,
+    1348,
+    994,
+    1348,
+    1040
+   ]
+  },
+  {
+   "id": "onao3000.mp4",
+   "title": "onao3000.mp4",
+   "src": "media/onao3000.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/onao3000.mp4.jpg",
+   "clip": "media/.previews/clips/onao3000.mp4.mp4"
+  },
+  {
+   "id": "spk0.jpg",
+   "title": "spk0.jpg",
+   "src": "media/spk0.jpg",
+   "kind": "image",
+   "poster": "media/.previews/posters/spk0.jpg.jpg"
+  },
+  {
+   "id": "sw4.mp4",
+   "title": "sw4.mp4",
+   "src": "media/sw4.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/sw4.mp4.jpg",
+   "clip": "media/.previews/clips/sw4.mp4.mp4"
+  },
+  {
+   "id": "taj_salo_00.mp4",
+   "title": "taj_salo_00.mp4",
+   "src": "media/taj_salo_00.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/taj_salo_00.mp4.jpg",
+   "clip": "media/.previews/clips/taj_salo_00.mp4.mp4"
+  },
+  {
+   "id": "teak.mp4",
+   "title": "teak.mp4",
+   "src": "media/teak.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/teak.mp4.jpg",
+   "clip": "media/.previews/clips/teak.mp4.mp4"
+  },
+  {
+   "id": "uth.mp4",
+   "title": "uth.mp4",
+   "src": "media/uth.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/uth.mp4.jpg",
+   "clip": "media/.previews/clips/uth.mp4.mp4"
+  },
+  {
+   "id": "uyvrquvruqrq.mp4",
+   "title": "uyvrquvruqrq.mp4",
+   "src": "media/uyvrquvruqrq.mp4",
+   "kind": "video",
+   "poster": "media/.previews/posters/uyvrquvruqrq.mp4.jpg",
+   "clip": "media/.previews/clips/uyvrquvruqrq.mp4.mp4",
+   "box": [
+    330,
+    42,
+    1260,
+    686,
+    1920,
+    1080
+   ]
+  }
+ ]
+}

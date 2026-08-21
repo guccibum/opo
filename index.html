@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>taj</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- three words, placed by measurement, and a readout that narrates -->
+<header id="top">
+  <nav id="words"></nav>
+  <span id="readout"></span>
+</header>
+
+<main>
+  <!-- taj: the word, out of the dark -->
+  <section id="page-taj" class="page">
+    <span id="intro-word"></span>
+  </section>
+
+  <!-- selected works: iteration two, holding three projects -->
+  <section id="page-works" class="page" hidden>
+    <div id="flow"><div id="rail"></div></div>
+    <div id="caption">
+      <h1 id="c-title"></h1>
+      <p  id="c-meta"></p>
+      <p  id="c-line"></p>
+      <button id="c-open" type="button">open</button>
+    </div>
+  </section>
+
+  <!-- map: a solid grid -->
+  <section id="page-map" class="page" hidden>
+    <div id="map"></div>
+  </section>
+</main>
+
+<!-- a project's contents, from selected works -->
+<div id="sheet" hidden>
+  <div id="sheet-body"></div>
+</div>
+
+<!-- what a piece on the map came with, when it has a readme -->
+<aside id="notes" hidden></aside>
+
+<!-- the way out of anything -->
+<button id="close" type="button" hidden></button>
+
+<div id="file-only" hidden>
+  <p><b>taj needs its server.</b></p>
+  <p>Opening index.html by double-clicking loads it over <code>file://</code>, where
+     the browser refuses to load JavaScript modules, cannot seek video, and will
+     not show the tiffs at all.</p>
+  <p>In VS Code, open a terminal in this folder and run:</p>
+  <pre>python3 serve.py</pre>
+  <p>Then go to <a href="http://localhost:8000">http://localhost:8000</a>.</p>
+</div>
+
+<script>
+  if (location.protocol === 'file:') {
+    document.getElementById('file-only').hidden = false;
+    document.body.classList.add('blocked');
+  }
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

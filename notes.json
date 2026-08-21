@@ -1,0 +1,40 @@
+{
+  "homer.mp4": {
+    "title": "homer",
+    "short": "homer",
+    "date": "march 2026",
+    "medium": "sculpture/video",
+    "course": "art105sp + Kim Garcia",
+    "abstract": "this is a video work about monumental sculpture. It was made firstly by carving a head meant to represent Homer Simpson out of sandstone. The video was made with a canon gl2 mini dv converted to digital with vcr and screen recording. Edited in premiere pro. It is important to me because I feel like I will in the future be able to look back on it as one of my early explorations of stone sculpture, and its use in video.",
+    "note": "Definitely going to work on my stone carving skills. Forgot to give music credit",
+    "links": [],
+    "readme": "_taj_homer_README.txt",
+    "fileNote": "just the video"
+  },
+  "taj_salo_00.mp4": {
+    "title": "alloces",
+    "short": "salo",
+    "date": "july30.2026",
+    "medium": "Website/Video",
+    "course": "MAT10 + Novak",
+    "abstract": "this is an exploration of the design process. The video was made using premiere pro and photoshop using footage from a canon gl2 on minidv converted to digital through vcr playback and screen recording. I made the audio in Ryans class. I made the node map using claude code building from scratch. I think this is important because it shows the steps taken in an iterative process. To me I think this process is far more important than the final video because no matter what I do in the future, it will always in some way be built through all of my past experiences.",
+    "note": "In the map itself I have a few relatively less grandiose images that I wouldn't mind putting in a portfolio of sorts [such as alkmm1 G35.png, which became a 24'x36'print]. I’d like to come up with an idea for displaying things other than as big projects. I met this super cool guy called Ilya Duganov who gave a very inspiring presentation with his portfolio",
+    "links": [
+      "https://guccibum.github.io/nodemap/"
+    ],
+    "readme": " taj_alocess_README.txt",
+    "fileNote": "the final culmination of the iterative process for this project"
+  },
+  "sw4.mp4": {
+    "title": "dweeb",
+    "short": "sw4",
+    "date": "december 2025",
+    "medium": "video",
+    "course": "cs15 + Madeline Ignon",
+    "abstract": "its something. Made with premiere pro. Canon gl2 mini dv converted with vcr mode and screen recording. Found footage was also used. Audio was found. I think its important because it shows some things I can do with video editing",
+    "note": "im curious for feedback of how this and salo read in conversation. To me they are starting to get a little repetitive with the videos of the same rocks, but in away i think that also builds a little world if watched chronologically with this first",
+    "links": [],
+    "readme": "_taj_dweeb_README.txt",
+    "fileNote": "the video"
+  }
+}
