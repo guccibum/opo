@@ -15,11 +15,28 @@
   <span id="readout"></span>
 </header>
 
-<!-- three empty pages. the row switches between them and nothing else happens. -->
+<!-- the second row. only there while its parent word is the current one. -->
+<nav id="subwords"></nav>
+
+<!-- empty pages. the rows switch between them and nothing else happens. -->
 <main>
-  <section id="page-taj"   class="page"></section>
-  <section id="page-works" class="page" hidden></section>
-  <section id="page-map"   class="page" hidden></section>
+  <section id="page-home"  class="page"></section>
+  <section id="page-about" class="page" hidden>
+    <div class="bio">
+      <p class="bio-name"><span class="s">taj</span></p>
+      <figure class="bio-shot">
+        <img src="media/bio/000B0048-CBBE-4864-BF0F-706725256F97.JPEG" alt="taj">
+      </figure>
+      <!-- SWAP: the real artist statement goes here, in place of the filler -->
+      <p class="bio-text">artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement artist statement</p>
+    </div>
+  </section>
+  <section id="page-work"  class="page" hidden></section>
+
+  <!-- work's three branches -->
+  <section id="page-video"     class="page" hidden></section>
+  <section id="page-sculpture" class="page" hidden></section>
+  <section id="page-image"     class="page" hidden></section>
 </main>
 
 <div id="file-only" hidden>
