@@ -58,21 +58,30 @@ export { reel, map };
 // Filenames carry spaces, so each is encoded on its way into a url.
 const url = (section, name) => DIR + section + '/' + encodeURIComponent(name);
 
-export function build() {
-  for (const [section, names] of Object.entries(SETS)) {
-    const page = document.getElementById('page-' + section);
-    if (!page || !names.length) continue;
+const built = new Set();
 
-    if (section === 'image') {
-      const field = document.createElement('div');
-      field.className = 'map';
-      page.textContent = '';
-      page.appendChild(field);
-      map.bind(field, {});
-      map.build(names.map(name => ({ name, src: url(section, name) })));
-      map.start();      // it deals itself the first time the page is looked at
-    } else {
-      reel.build(page, DIR + section, names);
-    }
+// A section is built the first time it is asked for, not at boot.
+//
+// Built up front, arriving at the homepage cost every one of the map's
+// twenty-three photographs and a metadata read plus a frame seek from all five
+// videos — about ten megabytes to look at three words. Nothing here changes
+// what any section is, only when it comes into existence.
+export function ensure(section) {
+  if (built.has(section)) return;
+  const names = SETS[section];
+  const page = document.getElementById('page-' + section);
+  if (!page || !names || !names.length) return;
+  built.add(section);
+
+  if (section === 'image') {
+    const field = document.createElement('div');
+    field.className = 'map';
+    page.textContent = '';
+    page.appendChild(field);
+    map.bind(field, {});
+    map.build(names.map(name => ({ name, src: url(section, name) })));
+    map.start();      // it deals itself the first time the page is looked at
+  } else {
+    reel.build(page, DIR + section, names);
   }
 }

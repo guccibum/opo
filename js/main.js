@@ -11,10 +11,11 @@
 //
 // The ground tears under the cursor on every page, not only home.
 //
+// A section builds itself the first time it is asked for — see work.ensure.
+//
 // The ground is a canvas running Generative Gestaltung's image feedback under
 // the cursor. See js/ground.js, and js/panel.js for the box that drives it —
 // press g to put that away or bring it back.
-
 
 import * as nav from './nav.js';
 import * as ground from './ground.js';
@@ -32,9 +33,7 @@ nav.bind([
       { id: 'sculpture', label: 'sculpture' },
       { id: 'image',     label: 'image' },
   ] },
-]);
-
-work.build();                          // the media, under video / sculpture / image
+], (page, branch) => work.ensure(branch || page));
 
 nav.show('home');                      // land deliberately, with nothing open
 

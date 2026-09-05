@@ -292,8 +292,6 @@ function hold(i) {
   if (hooks.hover) hooks.hover(i == null ? null : items[i].piece);
 }
 
-export function release() { hold(null); }
-
 /* ---------- opening ---------- */
 
 // Iteration one's push, kept for EXPAND_PUSH: move `other` clear of `rect`

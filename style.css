@@ -43,7 +43,6 @@
   --size:  16px;
   --lead:  1.45;
 
-  --top-h: 62px;
 }
 
 * { box-sizing: border-box; }
@@ -129,13 +128,6 @@ body.blocked > *:not(#file-only) { display: none; }
 }
 .word:hover .label { top: 12px; }
 
-#readout {
-  margin-left: auto;
-  font: var(--weight) 36px/1.2 var(--type);
-  color: var(--ink); opacity: .6;
-  max-width: 46vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  pointer-events: none;
-}
 
 /* ---------- the second row ---------- */
 /* The same thing one size down, under the first. It is never removed from the

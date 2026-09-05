@@ -34,7 +34,7 @@
 
 const EDGE = 26;                        // px kept clear of the window, as #top has
 
-let wordsEl, subEl, readoutEl, ctx = null, onGo = () => {};
+let wordsEl, subEl, ctx = null, onGo = () => {};
 let words = [];
 let subs = new Map();                   // parent page id -> its child words
 let at = null, branchAt = null;
@@ -97,7 +97,6 @@ function makeWord(into, cls, id, label, click) {
 export function bind(pages, go) {
   wordsEl = document.getElementById('words');
   subEl = document.getElementById('subwords');
-  readoutEl = document.getElementById('readout');
   onGo = go || onGo;
 
   wordsEl.textContent = '';
@@ -268,8 +267,4 @@ export function showBranch(parent, id) {
     showPage(k.dataset.page, on);
   }
   onGo(parent, id);
-}
-
-export function readout(text) {
-  if (readoutEl) readoutEl.textContent = text || '';
 }

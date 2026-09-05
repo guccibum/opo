@@ -239,7 +239,6 @@ function applyPalette(image, ink) {
 export const themeIndex = () => themeAt;
 const wrap = i => ((i % THEMES.length) + THEMES.length) % THEMES.length;
 export const theme = i => THEMES[wrap(i == null ? themeAt : i)];
-export const themeSrc = i => theme(i).src;
 
 // Swap the picture under everything. The canvas is re-fitted because the two
 // files are nothing like the same shape, and the frame is reset rather than
@@ -287,8 +286,6 @@ export function heal() {
   aim = 0; force = 0;
   reset();
 }
-
-export const ready = () => running;
 
 /* ---------- go ---------- */
 

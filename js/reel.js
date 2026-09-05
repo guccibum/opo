@@ -68,7 +68,7 @@ let flowEl, rail, nameEl, items = [];
 let pos = 0, target = 0, last = null, reported = -1;
 let touched = -1e9, resumeFor = RESUME_MS, speed = DRIFT, lastT = 0;
 let hovered = null, paused = false, drag = null, dragged = false;
-let running = false;
+let running = false, bound = false;
 
 const wrapIndex = i => {
   const n = items.length;
@@ -102,8 +102,14 @@ export function build(mount, dir, names) {
 
   flowEl.addEventListener('wheel', onWheel, { passive: false });
   flowEl.addEventListener('pointerdown', onDown);
-  addEventListener('pointermove', onMove);
-  addEventListener('pointerup', onUp);
+  // On the window, so a drag that leaves the reel still finishes — and added
+  // once, because the reel is a single thing and a second build() would
+  // otherwise leave the first set attached and moving it twice per pointer.
+  if (!bound) {
+    bound = true;
+    addEventListener('pointermove', onMove);
+    addEventListener('pointerup', onUp);
+  }
 
   items = [];
   for (const name of names) {
