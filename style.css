@@ -596,29 +596,3 @@ main { position: relative; }
   #player.on { transform: none; }
   .player-x { transition: none; }
 }
-
-/* ---------- sculpture: a row to a work ---------- */
-/* The map's furniture, laid out differently. Each row is one piece and its
-   shots are justified across the full width — flex-grow is set to each
-   photograph's own aspect ratio by js/rows.js, which is what makes a row come
-   out at one height and exactly the width available. */
-
-#page-sculpture { overflow: visible; }
-
-.rows {
-  padding: 150px 26px 16vh;
-  display: flex; flex-direction: column; gap: 26px;
-}
-.row { display: flex; gap: 4px; }
-
-/* A piece is as wide as its flex-grow makes it, and as tall as its photograph
-   then is. That is the whole trick: with grow set to the aspect ratio and basis
-   at 0, every shot in a row comes out the same height and the row fills the
-   width exactly. The picture must size itself for that to work — given a height
-   of 100% it would be measuring a box that has no height yet, and the row
-   collapses to a line. */
-.rows .piece {
-  position: relative; top: auto; left: auto;
-  flex: 1 1 0; min-width: 0;
-}
-.rows .piece img { width: 100%; height: auto; display: block; }
