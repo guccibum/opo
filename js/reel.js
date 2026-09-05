@@ -130,12 +130,8 @@ export function build(mount, dir, names) {
     face.appendChild(v);
     el.appendChild(face);
 
-    // pressing a cover plays it where it stands; pressing it again stops it
-    el.addEventListener('click', () => {
-      if (dragged) return;
-      if (v.paused) { v.muted = false; v.play().catch(() => {}); }
-      else v.pause();
-    });
+    // pressing a cover opens it, larger, from the top
+    el.addEventListener('click', () => { if (!dragged) openPlayer(dir + '/' + name, name, el); });
     el.addEventListener('pointerenter', () => hold(items.findIndex(x => x.el === el)));
     el.addEventListener('pointerleave', () => {
       if (hovered != null && items[hovered].el === el) hold(null);
@@ -152,6 +148,97 @@ export function build(mount, dir, names) {
 
   if (!running) { running = true; requestAnimationFrame(loop); }
 }
+
+/* ---------- the playback window ---------- */
+//
+// A cover is a still. Pressing one opens the file itself in a window over the
+// page, from the beginning — the cover was parked at 12% to have something to
+// look at, and that is not where anyone wants to start watching.
+//
+// It grows out of the cover it came from, the way a branch row grows out of its
+// word: the origin is put on the cover and it scales up from almost nothing.
+
+let player, playerVideo, playerName, wasPaused = false;
+
+function buildPlayer() {
+  player = document.createElement('div');
+  player.id = 'player';
+  player.hidden = true;
+
+  const shut = document.createElement('button');
+  shut.type = 'button';
+  shut.className = 'player-x';
+  shut.append(document.createElement('i'), document.createElement('i'));
+  shut.setAttribute('aria-label', 'close');
+  shut.addEventListener('click', closePlayer);
+
+  const box = document.createElement('div');
+  box.className = 'player-box';
+
+  playerVideo = document.createElement('video');
+  playerVideo.controls = true;
+  playerVideo.playsInline = true;
+  playerVideo.preload = 'metadata';
+
+  playerName = document.createElement('p');
+  playerName.className = 'player-name';
+  playerName.appendChild(document.createElement('span')).className = 's';
+
+  box.append(playerVideo, playerName);
+  player.append(shut, box);
+  document.body.appendChild(player);
+
+  // anywhere that is not the picture or its name closes it
+  player.addEventListener('click', e => {
+    if (e.target === player || e.target.classList.contains('player-box')) closePlayer();
+  });
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !player.hidden) closePlayer();
+  });
+}
+
+export function openPlayer(src, name, fromEl) {
+  if (!player) buildPlayer();
+
+  // the point it grows out of: the cover, in the window's own coordinates
+  if (fromEl) {
+    const r = fromEl.getBoundingClientRect();
+    player.style.transformOrigin =
+      `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
+  }
+
+  playerVideo.src = src;
+  playerVideo.currentTime = 0;              // from the beginning, not from the still
+  playerName.firstChild.textContent = name;
+
+  player.hidden = false;
+  // The transition needs a start value to travel from, so the shown-but-small
+  // state has to be flushed before `on` is added. Reading a layout property
+  // forces that synchronously — waiting a frame for it would leave the window
+  // stuck at 12% in any tab where requestAnimationFrame is throttled.
+  void player.offsetWidth;
+  player.classList.add('on');
+
+  playerVideo.play().catch(() => {});
+
+  wasPaused = paused;
+  pause(true);                              // the reel holds while you watch
+}
+
+export function closePlayer() {
+  if (!player || player.hidden) return;
+  player.classList.remove('on');
+  playerVideo.pause();
+  const v = playerVideo;
+  setTimeout(() => {
+    player.hidden = true;
+    v.removeAttribute('src');                // stop it downloading in the dark
+    v.load();
+  }, 360);
+  pause(wasPaused);
+}
+
+export const playerOpen = () => !!player && !player.hidden;
 
 /* ---------- geometry ---------- */
 
