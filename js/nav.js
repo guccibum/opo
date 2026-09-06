@@ -34,6 +34,11 @@
 
 const EDGE = 26;                        // px kept clear of the window, as #top has
 
+// The width there actually is to lay a row in. innerWidth counts the scrollbar
+// gutter and clientWidth does not, and on a phone that difference is most of
+// the margin — the row was coming out seventeen pixels wider than the page.
+const roomWidth = () => document.documentElement.clientWidth || innerWidth || 0;
+
 let wordsEl, subEl, ctx = null, onGo = () => {};
 let words = [];
 let subs = new Map();                   // parent page id -> its child words
@@ -74,8 +79,17 @@ function fontOf(el) {
 // area is given the stretched width outright — otherwise the words are drawn
 // four times as wide on top of one another, and only the left quarter of each
 // one can be pointed at.
-function stretchOf(el) {
+// What a row is *asked* to be pulled to, off the stylesheet.
+function wantedStretch(el) {
   return parseFloat(getComputedStyle(el).getPropertyValue('--stretch')) || 1;
+}
+
+// What it is actually pulled to. lay() writes this per element once it knows
+// how much room there is; the css falls back to the asked-for value so the
+// rows are still right if none of this has run yet.
+function stretchOf(el) {
+  const fit = parseFloat(el.style.getPropertyValue('--stretch-fit'));
+  return fit || wantedStretch(el);
 }
 
 // One word: the catch area, and the label that is the only thing that moves.
@@ -134,8 +148,26 @@ export function bind(pages, go) {
 function lay(row, mid) {
   if (!row.length) return;
   const font = fontOf(row[0]);
-  const k = stretchOf(row[0]);
-  const space = width(' ', font) * k;
+
+  // How wide the row would be with no pull on it at all.
+  const space0 = width(' ', font);
+  const natural = row.reduce((sum, el) => sum + width(el.textContent, font), 0)
+                + space0 * (row.length - 1);
+
+  // Pulled as far as the stylesheet asks, or as far as the window allows,
+  // whichever is less. On a wide screen the asked-for number wins and nothing
+  // changes; on a phone `home about work` at four times its width is about
+  // 1190px against 375 of screen, and no amount of centring saves that.
+  // A window that has not measured itself yet reports nothing, and fitting to
+  // nothing shrinks the row to a hairline it never recovers from — no resize
+  // follows to put it right. Below anything plausible, the asked-for pull
+  // stands and the row simply overflows until there is a real number.
+  const room = roomWidth() - EDGE * 2;
+  const want = wantedStretch(row[0]);
+  const k = room > 40 ? Math.min(want, room / natural) : want;
+  for (const el of row) el.style.setProperty('--stretch-fit', k);
+
+  const space = space0 * k;
   const widths = row.map(el => width(el.textContent, font) * k);
   const total = widths.reduce((a, b) => a + b, 0) + space * (row.length - 1);
 
@@ -144,9 +176,10 @@ function lay(row, mid) {
   // long row past the frame — so it is slid back inside and the centring is
   // given up only as far as it has to be. A row wider than the window itself
   // cannot be helped, and stays centred rather than being pinned to one side.
+  const W = roomWidth();
   let x = mid - total / 2;
-  if (total + EDGE * 2 <= innerWidth) {
-    x = Math.max(EDGE, Math.min(x, innerWidth - EDGE - total));
+  if (total + EDGE * 2 <= W) {
+    x = Math.max(EDGE, Math.min(x, W - EDGE - total));
   }
 
   row.forEach((el, i) => {
@@ -179,7 +212,7 @@ function originOn(parentEl) {
 }
 
 export function position() {
-  lay(words, innerWidth / 2);
+  lay(words, roomWidth() / 2);
 
   // every set is laid out, not only the visible one: a hidden row still has to
   // be in the right place the instant its parent is clicked

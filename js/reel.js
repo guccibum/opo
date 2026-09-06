@@ -25,6 +25,15 @@ const COVER_H = 340;   // tallest a cover may be, and the fallback shape
 const SPREAD  = 165;   // px between two neighbouring side covers
 const GUTTER  = 170;   // extra px the centre cover pushes its neighbours out by
 const DEPTH   = 290;   // how far back a side cover sits
+
+// The reel is drawn in fixed pixels, which on a phone puts the centre cover
+// wider than the screen and its neighbours entirely off it. Everything is
+// scaled by the same number so the arrangement keeps its proportions.
+const FIT_AT = 1100;   // px of window the numbers above were chosen for
+const fit = () => {
+  const w = document.documentElement.clientWidth || innerWidth || 0;
+  return w > 40 ? Math.min(1, w / FIT_AT) : 1;   // unmeasured: leave it alone
+};
 const ANGLE   = 62;    // degrees a side cover is turned
 
 // How the turn is paced as a cover crosses the front.
@@ -97,8 +106,9 @@ export function build(mount, dir, names) {
   mount.textContent = '';
   mount.append(flowEl, nameEl);
 
-  flowEl.style.setProperty('--cover-w', COVER_W + 'px');
-  flowEl.style.setProperty('--cover-h', COVER_H + 'px');
+  const k = fit();
+  flowEl.style.setProperty('--cover-w', COVER_W * k + 'px');
+  flowEl.style.setProperty('--cover-h', COVER_H * k + 'px');
 
   flowEl.addEventListener('wheel', onWheel, { passive: false });
   flowEl.addEventListener('pointerdown', onDown);
@@ -128,15 +138,36 @@ export function build(mount, dir, names) {
     // there is something to look at without streaming the file.
     v.addEventListener('loadedmetadata', () => {
       if (v.videoWidth && v.videoHeight) {
-        const w = Math.min(COVER_W, COVER_H * (v.videoWidth / v.videoHeight));
+        const k = fit();
+        const a = v.videoWidth / v.videoHeight;
+        const w = Math.min(COVER_W, COVER_H * a) * k;
         el.style.setProperty('--cover-w', w + 'px');
-        el.style.setProperty('--cover-h', (w / (v.videoWidth / v.videoHeight)) + 'px');
+        el.style.setProperty('--cover-h', (w / a) + 'px');
       }
       if (v.duration && isFinite(v.duration)) v.currentTime = v.duration * STILL_AT;
     }, { once: true });
 
     face.appendChild(v);
-    el.appendChild(face);
+
+    // The reflection. It used to be -webkit-box-reflect, which Firefox has no
+    // equivalent for at all — the reel was just cards there. A cover is always
+    // a still, so the frame can be caught once into a canvas and that canvas
+    // mirrored under it. One mechanism, the same in every browser.
+    const glass = document.createElement('div');
+    glass.className = 'glass';
+    glass.setAttribute('aria-hidden', 'true');
+    const mirror = document.createElement('canvas');
+    glass.appendChild(mirror);
+
+    v.addEventListener('seeked', () => {
+      if (!v.videoWidth) return;
+      const w = 340, h = Math.round(w * v.videoHeight / v.videoWidth);
+      mirror.width = w; mirror.height = h;
+      try { mirror.getContext('2d').drawImage(v, 0, 0, w, h); }
+      catch (e) { glass.remove(); }        // a frame we are not allowed to read
+    }, { once: true });
+
+    el.append(face, glass);
 
     // pressing a cover opens it, larger, from the top
     el.addEventListener('click', () => {
@@ -197,8 +228,9 @@ function layout() {
     const turn = TURN === 'eased' ? a : t;
     const L = it.lift;
 
-    const x  = o * SPREAD + s * GUTTER * a;
-    const z  = -a * DEPTH + HOLD_LIFT * L;
+    const k = fit();
+    const x  = (o * SPREAD + s * GUTTER * a) * k;
+    const z  = (-a * DEPTH + HOLD_LIFT * L) * k;
     const ry = s * turn * ANGLE * (1 - HOLD_FLAT * L);
     const sc = (1 - a * SHRINK) * (1 + (HOLD_GROW - 1) * L);
 
@@ -264,7 +296,7 @@ function onMove(e) {
   if (!drag) return;
   const dx = e.clientX - drag.x;
   if (Math.abs(dx) > 3) drag.moved = true;
-  target = drag.start - dx / (SPREAD + GUTTER);
+  target = drag.start - dx / ((SPREAD + GUTTER) * fit());
   touch();
 }
 function onUp() {

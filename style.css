@@ -122,7 +122,10 @@ body.blocked > *:not(#file-only) { display: none; }
 .word .label {
   display: inline-block;
   position: relative; top: 0;
-  transform: scaleX(var(--stretch)) scaleY(var(--stretch-y));
+  /* --stretch is what this row is asked to be pulled to; --stretch-fit is what
+     js/nav.js found room for. The fallback keeps the row right before, or
+     without, any of that running. */
+  transform: scaleX(var(--stretch-fit, var(--stretch))) scaleY(var(--stretch-y));
   transform-origin: left center;
   transition: top .5s ease-out;
 }
@@ -186,7 +189,10 @@ body.blocked > *:not(#file-only) { display: none; }
 .subword .label {
   display: inline-block;
   position: relative; top: 0;
-  transform: scaleX(var(--stretch)) scaleY(var(--stretch-y));
+  /* --stretch is what this row is asked to be pulled to; --stretch-fit is what
+     js/nav.js found room for. The fallback keeps the row right before, or
+     without, any of that running. */
+  transform: scaleX(var(--stretch-fit, var(--stretch))) scaleY(var(--stretch-y));
   transform-origin: left center;
   transition: top .5s ease-out;
 }
@@ -217,7 +223,7 @@ main { position: relative; }
   /* where it starts. js/panel.js only writes left/top once it has been dragged,
      so this corner costs no measurement and cannot land on the row. */
   position: fixed; right: 26px; bottom: 26px; z-index: 1200;
-  width: 400px;
+  width: min(400px, calc(100vw - 52px));
   /* A solid box with no edge drawn on it. It was see-through with a hairline
      around it, which meant the ground kept moving underneath the controls. */
   background: var(--panel);
@@ -410,7 +416,7 @@ main { position: relative; }
   transform-origin: left center;
 }
 
-.bio-shot { margin: 0; max-width: 340px; }
+.bio-shot { margin: 0; max-width: min(340px, 100%); }
 .bio-shot img { display: block; width: 100%; height: auto; }
 
 /* Not stretched. The rows can be four times as wide because they are three
@@ -434,6 +440,9 @@ main { position: relative; }
   perspective-origin: 50% 46%;
   overflow: hidden;
   cursor: grab;
+  /* the reel is dragged, so the gesture has to reach it rather than being
+     taken by the browser for a scroll */
+  touch-action: none;
 }
 /* the rail is a container and nothing else: a full-size box at z=0 with the
    covers pushed to negative z behind it, so it must not take the pointer */
@@ -456,9 +465,25 @@ main { position: relative; }
   width: 100%; height: 100%;
   background: rgb(var(--paper-rgb));
   overflow: hidden;
-  /* the iPod tell. one line — delete it and the reel is just cards */
-  -webkit-box-reflect: below 1px
-    linear-gradient(transparent, transparent 62%, rgb(var(--ink-rgb) / .16));
+}
+
+/* The iPod tell. It was -webkit-box-reflect, which Firefox does not have in any
+   form, so the reel had no reflection there at all. This is a canvas of the
+   cover's own frame, caught once by js/reel.js, mirrored and faded — the same
+   in every engine rather than one of them getting the idea and the rest not. */
+.cover .glass {
+  position: absolute; left: 0; top: 100%;
+  width: 100%; height: 62%;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / .5), transparent 82%);
+          mask-image: linear-gradient(to bottom, rgb(0 0 0 / .5), transparent 82%);
+}
+.cover .glass canvas {
+  display: block; width: 100%;
+  transform: scaleY(-1);
+  transform-origin: top;
+  opacity: .34;
 }
 .cover video { width: 100%; height: 100%; object-fit: contain; display: block; }
 
